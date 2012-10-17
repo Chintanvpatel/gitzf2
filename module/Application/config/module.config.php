@@ -10,7 +10,7 @@
 return array(
     'router' => array(
         'routes' => array(
-            'home' => array(
+             'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/',
@@ -19,19 +19,40 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
-            ),
-        	'user' => array(
-        				'type'    => 'segment',
+            ), 
+        	'album' => array(
+        				'type' => 'Zend\Mvc\Router\Http\Literal',
         				'options' => array(
-        						'route'    => '/default[/:controller][/:action][/:id]',
-        						'constraints' => array(
-        								'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-        								'id'     => '[0-9]+',
-        						),
+        						'route'    => '/album',
         						'defaults' => array(
+        								'controller' => 'Album\Controller\Album',
+        								'action'     => 'index',
         						),
         				),
         		),
+        	'user' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/user[/:action]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'signin',
+                    ),
+                ),
+            ),
+        	/* 'album' => array(
+        				'type' => 'Zend\Mvc\Router\Http\Literal',
+        				'options' => array(
+        						'route'    => '/album',
+        						'defaults' => array(
+        								'controller' => 'Album\Controller\Album',
+        								'action'     => 'index',
+        						),
+        				),
+        		), */
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -39,7 +60,7 @@ return array(
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/default',
+                    'route'    => 'user',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',

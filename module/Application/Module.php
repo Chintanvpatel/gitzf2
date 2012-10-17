@@ -26,7 +26,7 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
         $moduleRouteListener->attach($eventManager);
         
         //$e->getApplication()->getEventManager()->attach('dispatch', array($this, 'preDispatch'), 1);
-        $e->getApplication()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Application', MvcEvent::EVENT_DISPATCH, array($this, 'preDispatch'), 1);
+        $e->getApplication()->getEventManager()->getSharedManager()->attach(__NAMESPACE__, MvcEvent::EVENT_DISPATCH, array($this, 'preDispatch'), 1);
        
     }
 
@@ -65,6 +65,7 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
     
      public function preDispatch(\Zend\Mvc\MvcEvent $e)
     {
+    	// Define actions 
         $whiteListedPages = array(
             '/',
             '/signin',
@@ -72,9 +73,12 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
         );
         $application    = $e->getApplication();
         $serviceManager = $application->getServiceManager();
-        $request        = $application->getRequest();
-		
-        $uri = ltrim($request->getRequestUri(), '/myzf2/public/default/index/');
+        $controller = $e->getTarget();
+        $route = $controller->getEvent()->getRouteMatch();
+        
+        // Get action name from router
+        $uri = $route->getParam('action');
+        
         // getting the root page. If '/login' allowed, '/login/action' should be allowed too.
         if ($secondSegmentPos = strpos($uri, '/')) {
             $uri = substr($uri, 0, $secondSegmentPos);
@@ -87,11 +91,11 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
         }
         $authService = $serviceManager->get('myauth');
 
+        // Check identity
         if (!$authService->hasIdentity()) {
             $pluginManager  = $serviceManager->get('Zend\Mvc\Controller\PluginManager');
             $urlPlugin      = $pluginManager->get('url');
             $redirectPlugin = $pluginManager->get('redirect');
-            //return $redirectPlugin->toUrl($urlPlugin->fromRoute('login'));
             return $redirectPlugin->toRoute('user',array('controller'=>'index','action'=>'signin'));
         }
     } 
