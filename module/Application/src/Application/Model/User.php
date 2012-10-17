@@ -2,6 +2,8 @@
 
 namespace Application\Model;
 
+use Zend\Validator\NotEmpty;
+
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilterAwareInterface;
@@ -58,6 +60,12 @@ class User implements InputFilterAwareInterface
                             'min'      => 1,
                             'max'      => 100,
                         ),
+                    	'name'    => 'NotEmpty',
+                    	'options' => array(
+                    		'messages'=> array(
+                    			NotEmpty::IS_EMPTY => "Please enter username."
+                    		)
+                    	),
                     ),
                 ),
             )));
@@ -77,6 +85,12 @@ class User implements InputFilterAwareInterface
                             'min'      => 1,
                             'max'      => 100,
                         ),
+                    	'name'    => 'NotEmpty',
+                    	'options' => array(
+                    		'messages'=> array(
+                    			NotEmpty::IS_EMPTY => "Please enter username."
+                    		)
+                    	),
                     ),
                 ),
             )));
@@ -109,6 +123,12 @@ class User implements InputFilterAwareInterface
     										'min'      => 1,
     										'max'      => 100,
     								),
+    								'name'    => 'NotEmpty',
+    								'options' => array(
+    										'messages'=> array(
+    												NotEmpty::IS_EMPTY => "Please enter last name."
+    										)
+    								),
     						),
     				),
     		)));
@@ -127,6 +147,12 @@ class User implements InputFilterAwareInterface
     										'encoding' => 'UTF-8',
     										'min'      => 1,
     										'max'      => 100,
+    								),
+    								'name'    => 'NotEmpty',
+    								'options' => array(
+    										'messages'=> array(
+    												NotEmpty::IS_EMPTY => "Please enter first name."
+    										)
     								),
     						),
     				),
@@ -147,6 +173,12 @@ class User implements InputFilterAwareInterface
     										'min'      => 1,
     										'max'      => 100,
     								),
+    								'name'    => 'NotEmpty',
+    								'options' => array(
+    										'messages'=> array(
+    												NotEmpty::IS_EMPTY => "Please enter password."
+    										)
+    								),
     						),
     				),
     		)));
@@ -165,6 +197,12 @@ class User implements InputFilterAwareInterface
     										'encoding' => 'UTF-8',
     										'min'      => 1,
     										'max'      => 100,
+    								),
+    								'name'    => 'NotEmpty',
+    								'options' => array(
+    										'messages'=> array(
+    												NotEmpty::IS_EMPTY => "Please enter username."
+    										)
     								),
     						),
     				),
