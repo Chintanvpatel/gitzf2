@@ -33,6 +33,7 @@ class IndexController extends AbstractActionController
     			$result = $this->getUserTable()->authUser($userData);
     			if($result)
     			{
+    				$this->flashMessenger()->addMessage('Sign in successfully!');
     				return $this->redirect()->toRoute('user',array('controller'=>'index','action'=>'mypage'));
     			}
     		

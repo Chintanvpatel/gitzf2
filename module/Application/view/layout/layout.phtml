@@ -1,5 +1,8 @@
 <?php echo $this->doctype(); ?>
-
+<?php
+ $children = $this->viewModel()->getCurrent()->getChildren();
+ $view = $children[0];
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -34,6 +37,15 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
+        </div>
+        <div class="msg">
+            <?php if (isset($view->flashMessages) && count($view->flashMessages)) : ?>
+			<ul class="flashMessages">
+			    <?php foreach ($view->flashMessages as $fMessage) : ?>
+			    <li><?php echo $fMessage; ?></li>
+			    <?php endforeach; ?>
+			</ul>
+			<?php endif; ?>
         </div>
         <div class="container">
             <?php echo $this->content; ?>
