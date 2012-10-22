@@ -2,12 +2,18 @@
 
 namespace Application\Controller;
 
+use Zend\Mime\Mime;
+
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\User;
 use Application\Model\UserTable;
 use Application\Form\ApplicationForm;
 use Zend\Authentication\AuthenticationService as Auth;
+use Zend\Mail;
+use Zend\Mail\Message;
+use Zend\Mime\Message as MimeMessage;
+use Zend\Mime\Part as MimePart;
 
 class IndexController extends AbstractActionController
 {
@@ -91,5 +97,35 @@ class IndexController extends AbstractActionController
     		$this->userTable = $sm->get('Application\Model\UserTable');
     	}
     	return $this->userTable;
+    }
+    
+    public function mailAction()
+    {
+    	
+    	$text = new MimePart('Hello World');
+    	$text->type = "text/plain";
+    	
+    	$html = new MimePart('Sample image attachment');
+    	$html->type = "text/html";
+    	
+    	$image = new MimePart(fopen('public/images/zf2-logo.png','r'));
+    	$image->type = "image/png";
+    	$image->encoding = 'base64';
+    	$image->disposition = Mime::DISPOSITION_ATTACHMENT;
+    	$image->filename = 'zf2-logo.png';
+    	
+    	
+    	$body = new MimeMessage();
+    	$body->setParts(array($text, $html, $image));
+    	
+    	$message = new Message();
+    	$message->setBody($body);
+    	
+    	$message
+    	->setFrom('ch11cvaindian@gmail.com', 'Chintan')      
+    	->addTo('chintanv.patel@indianic.com', 'Chintan')
+    	->setSubject('TestSubject');
+    	$transport = new Mail\Transport\Sendmail();
+    	$transport->send($message);
     }
 }
