@@ -21,11 +21,16 @@ class IndexController extends AbstractActionController
 	
     public function indexAction()
     {
-       
+      
     }
     
     public function signinAction()
     {
+    	$sm = $this->getServiceLocator();
+    	$auth = $sm->get('myauth');
+    	if ($auth->hasIdentity()) {
+    		return $this->redirect()->toRoute('user',array('controller'=>'index','action'=>'mypage'));
+    	}
     	$form = new ApplicationForm();
     	$form->get('submit')->setAttribute('value', 'Login');
     	

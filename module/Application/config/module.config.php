@@ -20,6 +20,16 @@ return array(
                     ),
                 ),
             ), 
+        	'userhome' => array(
+        			'type' => 'Zend\Mvc\Router\Http\Literal',
+        			'options' => array(
+        					'route'    => '/user/',
+        					'defaults' => array(
+        						'controller' => 'Application\Controller\Index',
+        						'action'     => 'signin',
+        				),
+        			),
+        		),
         	'album' => array(
         				'type' => 'Zend\Mvc\Router\Http\Literal',
         				'options' => array(
