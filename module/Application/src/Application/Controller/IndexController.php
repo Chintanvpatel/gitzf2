@@ -51,7 +51,7 @@ class IndexController extends AbstractActionController
     			return $this->redirect()->toRoute('user',array('controller'=>'index','action'=>'signin'));
     		}
     	}
-    	return array('form' => $form);
+    	return array('form' => $form , 'flashMessages' => $this->flashMessenger()->getMessages() );
     }
     
     public function signupAction()
@@ -68,7 +68,7 @@ class IndexController extends AbstractActionController
     		if ($form->isValid()) {
     			$user->exchangeArray($form->getData());
     			$this->getUserTable()->saveUser($user);
-    			
+    			$this->flashMessenger()->addMessage('New Account is created !');
     			// Redirect to list of Sign In
     			return $this->redirect()->toRoute('user',array('controller'=>'index','action'=>'signin'));
     		}
@@ -83,7 +83,7 @@ class IndexController extends AbstractActionController
     		return $this->redirect()->toRoute('user',array('controller'=>'index','action'=>'signin'));
     	}
     	$name = $auth->getIdentity()->fname;
-    	return array('name' => $name);
+    	return array('name' => $name , 'flashMessages' => $this->flashMessenger()->getMessages() );
     }
     
     public function logoutAction()
