@@ -22,6 +22,17 @@ return array(
                     ),
                 ),
             ),
+        		'paginator' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        						'route' => '/album/[page/:page]',
+        						'defaults' => array(
+        								'page' => 1,
+        								'controller' => 'Album\Controller\Album',
+        								'action'     => 'index',
+        						),
+        				),
+        		),
         ),
     ),
 

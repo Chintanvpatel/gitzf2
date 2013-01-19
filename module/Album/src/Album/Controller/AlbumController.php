@@ -6,15 +6,28 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Album\Model\Album;
 use Album\Form\AlbumForm;
+use Zend\Db\ResultSet\ResultSet;
 
 class AlbumController extends AbstractActionController
 {
     protected $albumTable;
 
-    public function indexAction()
+	public function indexAction()
     {
+    	//$page    = $this->params()->fromRoute('paginator');
+    	//$matches =  $this->getEvent()->getRouteMatch();
+    	//$page = $matches->getParam('page');
+    	$page = (int)$this->params('page');
+    	$albumData = $this->getAlbumTable()->fetchAll();
+    	$data = array();
+    	foreach ($albumData as $d) {
+    		$data[] = $albumData->current();
+    	}
+    	$paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($data));
+    	$paginator->setCurrentPageNumber($page);
+    	$paginator->setItemCountPerPage(2);
         return new ViewModel(array(
-            'albums' => $this->getAlbumTable()->fetchAll(),
+            'paginator' => $paginator,
         ));
     }
 
