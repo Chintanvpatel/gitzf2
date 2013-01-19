@@ -1,1 +1,5 @@
-This is my zf2 Sample Application with authentication.
+ZF2 Sample Application
+Includes 
+  1. Authentication
+  2. CRUD Operation
+  3. Pagination
