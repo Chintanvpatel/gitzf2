@@ -1,5 +1,6 @@
 ZF2 Sample Application
 Includes 
-  1. Authentication
-  2. CRUD Operation
-  3. Pagination
+  1. Authentication (Application module)
+  2. CRUD Operation 
+  3. Pagination (Album module)
+  4. ACL (Application module)
