@@ -26,6 +26,7 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
         $moduleRouteListener->attach($eventManager);
         
         //$e->getApplication()->getEventManager()->attach('dispatch', array($this, 'preDispatch'), 1);
+        $e->getApplication()->getEventManager()->getSharedManager()->attach(__NAMESPACE__, MvcEvent::EVENT_DISPATCH, array($this, 'getacl'), 2);
         $e->getApplication()->getEventManager()->getSharedManager()->attach(__NAMESPACE__, MvcEvent::EVENT_DISPATCH, array($this, 'preDispatch'), 1);
        
     }
@@ -99,4 +100,12 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
             return $redirectPlugin->toRoute('user',array('controller'=>'index','action'=>'signin'));
         }
     } 
+    
+    public function getacl(MvcEvent $e)
+    {
+    	$application    = $e->getApplication();
+    	$serviceManager = $application->getServiceManager();
+    	$plugin = $serviceManager->get('ControllerPluginManager')->get('Aclplugin')->check($e);
+    	return $plugin;
+    }
 }

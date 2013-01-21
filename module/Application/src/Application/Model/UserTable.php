@@ -87,6 +87,7 @@ class UserTable extends AbstractTableGateway
     		$storage->write($dbAdapter->getResultRowObject(array(
     				'user',
     				'fname',
+    				'user_level'
     		)));
     		return true;
     	}
