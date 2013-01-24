@@ -21,6 +21,33 @@ class AlbumTable extends AbstractTableGateway
 
     public function fetchAll()
     {
+    	
+    	//$data = $this->adapter->query('SELECT * FROM `album`');
+    	//print_r($data); exit;
+    	 
+    	// Using SQL
+    	/* $sql = new Sql($this->adapter);
+    	 $select = $sql->select();
+    	$select->from('album');
+    	$select->where(array('id' => 2));
+    	//print_r($select);
+    	 
+    	$statement = $sql->prepareStatementForSqlObject($select);
+    	$results = $statement->execute();
+    	print_r($results->current()); exit; */
+    	 
+    	/* $sql = new Sql($this->adapter);
+    	$select = $sql->select();
+    	$select->from('album');
+    	$select->columns(array('album_id'=> new Expression("count(album.id)")));
+    	$select->join('user', 'user.id = album.id' , array('fname','lname'),$select::JOIN_LEFT);
+    	$select->where(array('album.id'=> 1));
+    	//$select->where->like('fname', '%ate%');
+    	$statement = $sql->prepareStatementForSqlObject($select);
+    	print_r($statement); exit;
+    	$results = $statement->execute();
+    	print_r($results); exit;   */
+    	
         $resultSet = $this->select();
         return $resultSet;
     }
