@@ -3,6 +3,7 @@
 namespace Album;
 
 use Album\Model\AlbumTable;
+use Album\AdapterFactory\AdapterFactory;
 
 class Module
 {
@@ -20,16 +21,18 @@ class Module
         );
     }
     
-    public function getServiceConfig()
+public function getServiceConfig()
     {
         return array(
             'factories' => array(
-                'Album\Model\AlbumTable' =>  function($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $table = new AlbumTable($dbAdapter);
-                    return $table;
-                },
-            ),
+            		'adapter1'        => new AdapterFactory('db1'),
+            		'adapter2'        => new AdapterFactory('db2'),
+	                'Album\Model\AlbumTable' =>  function($sm) {
+	                    $dbAdapter = $sm->get('adapter1');
+	                    $table = new AlbumTable($dbAdapter);
+	                    return $table;
+	                },
+	            ),
         );
     }    
 
