@@ -6,6 +6,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\Stdlib\Hydrator;
 
 class Album implements InputFilterAwareInterface
 {
@@ -28,6 +29,13 @@ class Album implements InputFilterAwareInterface
     public function getArrayCopy()
     {
         return get_object_vars($this);
+    }
+    
+    // Convert Object to Array using Hydrator\ObjectProperty
+    public function getArrayFromObject()
+    {
+    	$hydrator = new Hydrator\ObjectProperty();
+    	return  $hydrator->extract($this);
     }
 
     public function setInputFilter(InputFilterInterface $inputFilter)

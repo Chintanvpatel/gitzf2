@@ -43,6 +43,8 @@ class AlbumController extends AbstractActionController
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $album->exchangeArray($form->getData());
+                /** Get Array from object **/
+                // $data = $album->getArrayFromObject();
                 $this->getAlbumTable()->saveAlbum($album);
 
                 // Redirect to list of albums
