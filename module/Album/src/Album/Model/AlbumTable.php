@@ -65,10 +65,12 @@ class AlbumTable extends AbstractTableGateway
 
     public function saveAlbum(Album $album)
     {
+    	/** Get array from object **/
+        //$data = $album->getArrayFromObject();
         $data = array(
             'artist' => $album->artist,
             'title'  => $album->title,
-        );
+        ); 
 
         $id = (int)$album->id;
         if ($id == 0) {
