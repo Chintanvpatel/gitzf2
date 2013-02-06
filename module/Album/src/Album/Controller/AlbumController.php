@@ -26,9 +26,13 @@ class AlbumController extends AbstractActionController
     	$paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($data));
     	$paginator->setCurrentPageNumber($page);
     	$paginator->setItemCountPerPage(2);
+        /** Change layout **/
+    	//$this->layout('layout/layoutalbum');
         return new ViewModel(array(
             'paginator' => $paginator,
         ));
+        /** Change view files **/
+        //$viewModel->setTemplate('album/album/nameofphtmlfile');
     }
 
     public function addAction()
