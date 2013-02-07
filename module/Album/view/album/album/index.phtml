@@ -13,7 +13,7 @@ $this->headTitle($title);
     <th>&nbsp;</th>
 </tr>
 <?php foreach($paginator as $album) : ?>
-<tr>
+<tr style="background-color:<?php echo $this->cycle(array("#F0F0F0","#FFFFFF"))->next()?>">
     <td><?php echo $this->escapeHtml($album->title);?></td>
     <td><?php echo $this->escapeHtml($album->artist);?></td>
     <td>

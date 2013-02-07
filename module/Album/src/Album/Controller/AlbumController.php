@@ -25,7 +25,7 @@ class AlbumController extends AbstractActionController
     	}
     	$paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($data));
     	$paginator->setCurrentPageNumber($page);
-    	$paginator->setItemCountPerPage(2);
+    	$paginator->setItemCountPerPage(4);
         /** Change layout **/
     	//$this->layout('layout/layoutalbum');
         return new ViewModel(array(
