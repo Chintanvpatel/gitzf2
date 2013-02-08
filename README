@@ -5,3 +5,5 @@ Includes
   3. Pagination (Album module)
   4. ACL (Application module)
   5. Multiple DB (Album Module)
+  6. Image upload (User module registration)
+  
