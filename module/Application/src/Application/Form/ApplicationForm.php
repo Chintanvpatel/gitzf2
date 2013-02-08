@@ -47,6 +47,7 @@ class ApplicationForm extends Form
     {
     	$this->setAttribute('name', 'register');
     	$this->setAttribute('method', 'post');
+    	$this->setAttribute('enctype','multipart/form-data');
     	
     	$this->add(array(
     			'name' => 'fname',
@@ -85,6 +86,16 @@ class ApplicationForm extends Form
     			),
     			'options' => array(
     					'label' => 'Password',
+    			),
+    	));
+    	
+    	$this->add(array(
+    			'name' => 'fileupload',
+    			'attributes' => array(
+    					'type'  => 'file',
+    			),
+    			'options' => array(
+    					'label' => 'Profile Picture',
     			),
     	));
     	

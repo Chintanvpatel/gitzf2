@@ -24,6 +24,7 @@ class User implements InputFilterAwareInterface
         $this->lname  = (isset($data['lname'])) ? $data['lname'] : null;
         $this->user  = (isset($data['user'])) ? $data['user'] : null;
         $this->pass  = (isset($data['pass'])) ? $data['pass'] : null;
+        $this->fileupload  = (isset($data['fileupload'])) ? $data['fileupload'] : null;
     } 
 
 	protected $inputFilter;

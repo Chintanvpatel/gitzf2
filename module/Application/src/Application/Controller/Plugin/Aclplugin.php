@@ -20,7 +20,7 @@ class Aclplugin extends AbstractPlugin
         $acl->addRole(new Role('Admin'), 'User');
        
         
-        $acl->allow('Guest', null, array('signin','index'));
+        $acl->allow('Guest', null, array('signin','index','signup'));
         
         $acl->allow('User',null, array('signin','mypage','logout'));
         

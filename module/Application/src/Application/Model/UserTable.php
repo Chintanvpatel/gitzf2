@@ -45,6 +45,7 @@ class UserTable extends AbstractTableGateway
             'lname'  => $user->lname,
         	'user'  => $user->user,
         	'pass'  => md5($user->pass),
+        	'fileupload' => $user->fileupload,
         );
 
         $id = (int)$user->id;
