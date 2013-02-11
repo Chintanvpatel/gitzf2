@@ -14,6 +14,7 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\Authentication\AuthenticationService;
 
 
 class Module implements AutoloaderProviderInterface,ConfigProviderInterface
@@ -24,11 +25,14 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        $sm = $e->getApplication()->getServiceManager();
         
-        //$e->getApplication()->getEventManager()->attach('dispatch', array($this, 'preDispatch'), 1);
-        $e->getApplication()->getEventManager()->getSharedManager()->attach(__NAMESPACE__, MvcEvent::EVENT_DISPATCH, array($this, 'getacl'), 2);
+        $e->getApplication()->getEventManager()->getSharedManager()->attach(__NAMESPACE__, MvcEvent::EVENT_DISPATCH, function ($e) use ($sm) {
+        	$sm->get('ControllerPluginManager')->get('Aclplugin')->check($e);
+        }, 2);
+        //$e->getApplication()->getEventManager()->getSharedManager()->attach(__NAMESPACE__,'save', array($this, 'save'), 3);
+        //$e->getApplication()->getEventManager()->getSharedManager()->attach(__NAMESPACE__, MvcEvent::EVENT_DISPATCH, array($this, 'getacl'), 2);
         $e->getApplication()->getEventManager()->getSharedManager()->attach(__NAMESPACE__, MvcEvent::EVENT_DISPATCH, array($this, 'preDispatch'), 1);
-       
     }
 
     public function getConfig()
@@ -90,7 +94,7 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
         if (in_array($uri,$whiteListedPages)) { 
             return;
         }
-        $authService = $serviceManager->get('myauth');
+        $authService = new AuthenticationService();
 
         // Check identity
         if (!$authService->hasIdentity()) {
@@ -101,11 +105,16 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
         }
     } 
     
-    public function getacl(MvcEvent $e)
+    /* public function getacl(MvcEvent $e)
     {
     	$application    = $e->getApplication();
     	$serviceManager = $application->getServiceManager();
     	$plugin = $serviceManager->get('ControllerPluginManager')->get('Aclplugin')->check($e);
     	return $plugin;
-    }
+    } */
+    
+  /*  public function save()
+    {
+    	echo "here"; exit;
+    }  */
 }
