@@ -94,6 +94,8 @@ return array(
             },
         ),
     ),
+    
+    // Gettext translation 
     'translator' => array(
         'locale' => 'en_US',
         'translation_file_patterns' => array(
@@ -104,6 +106,20 @@ return array(
             ),
         ),
     ),
+    
+    // PHP Array translation
+    
+    /* 'translator' => array(
+    		'locale' => 'en_US',
+    		'translation_file_patterns' => array(
+    				array(
+    						'type'     => 'phparray',
+    						'base_dir' => __DIR__ . '/../language',
+    						'pattern'  => '%s.php',
+    				),
+    		),
+    ), */
+            
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController'
