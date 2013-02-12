@@ -104,7 +104,7 @@ public function preDispatch(\Zend\Mvc\MvcEvent $e)
             $pluginManager  = $serviceManager->get('Zend\Mvc\Controller\PluginManager');
             $urlPlugin      = $pluginManager->get('url');
             $redirectPlugin = $pluginManager->get('redirect');
-            return $redirectPlugin->toRoute('user',array('controller'=>'index','action'=>'signin','lang'=>'en'));
+            return $redirectPlugin->toRoute('user',array('controller'=>'index','action'=>'signin'));
         }
     } 
     
