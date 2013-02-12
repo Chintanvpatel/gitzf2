@@ -208,6 +208,21 @@ class User implements InputFilterAwareInterface
     						),
     				),
     		)));
+    		
+    		$inputFilter->add($factory->createInput(array(
+    				'name'     => 'fileupload',
+    				'required' => true,
+    				'validators' => array(
+    						array(
+    								'name'    => 'NotEmpty',
+    								'options' => array(
+    										'messages'=> array(
+    												NotEmpty::IS_EMPTY => "Please select file."
+    										)
+    								),
+    						),
+    				),
+    		)));
     
     		$this->inputFilter = $inputFilter;
     	}
