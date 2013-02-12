@@ -84,8 +84,14 @@ public function preDispatch(\Zend\Mvc\MvcEvent $e)
         $controller = $e->getTarget();
         $route = $controller->getEvent()->getRouteMatch();
         
+        // set locale in tanslate
+        $translator = $serviceManager->get('translator');
+        
         // Get action name from router
         $uri = $route->getParam('action');
+        
+        // Get Language & Set Locale in Transaltor
+        //$lang = $route->getParam('lang');
         
         // getting the root page. If '/login' allowed, '/login/action' should be allowed too.
         /* if ($secondSegmentPos = strpos($uri, '/')) {
@@ -98,13 +104,12 @@ public function preDispatch(\Zend\Mvc\MvcEvent $e)
             return;
         }
         $authService = new AuthenticationService();
-
         // Check identity
         if (!$authService->hasIdentity()) {
             $pluginManager  = $serviceManager->get('Zend\Mvc\Controller\PluginManager');
             $urlPlugin      = $pluginManager->get('url');
             $redirectPlugin = $pluginManager->get('redirect');
-            return $redirectPlugin->toRoute('user',array('controller'=>'index','action'=>'signin'));
+            return $redirectPlugin->toRoute('user/lang',array('controller'=>'index','action'=>'signin','lang'=>'en'));
         }
     } 
     

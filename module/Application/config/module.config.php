@@ -41,7 +41,7 @@ return array(
         				),
         		),
         	'user' => array(
-                'type'    => 'segment',
+                'type'    => 'Segment',
                 'options' => array(
                     'route'    => '/user[/:action][/]',
                     'constraints' => array(
@@ -52,6 +52,21 @@ return array(
                         'action'     => 'signin',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                		'lang' => array(
+                				'type' => 'Segment',
+                				'options' => array(
+                						'route' => '[:lang][/]',
+                						'constraints' => array(
+                								'lang' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                						),
+                						'defaults' => array(
+					                       // 'lang' => 'en',
+					                    ),
+                				),
+                		),
+                  ),
             ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
