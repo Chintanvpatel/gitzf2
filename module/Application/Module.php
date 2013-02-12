@@ -68,7 +68,7 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
     	);
     }
     
-     public function preDispatch(\Zend\Mvc\MvcEvent $e)
+public function preDispatch(\Zend\Mvc\MvcEvent $e)
     {
     	// Define actions 
         $whiteListedPages = array(
@@ -76,6 +76,9 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
             '/signin',
             '/signup',
         );
+        
+        $whiteActions = array('index','signin','signup');
+        
         $application    = $e->getApplication();
         $serviceManager = $application->getServiceManager();
         $controller = $e->getTarget();
@@ -85,13 +88,13 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
         $uri = $route->getParam('action');
         
         // getting the root page. If '/login' allowed, '/login/action' should be allowed too.
-        if ($secondSegmentPos = strpos($uri, '/')) {
+        /* if ($secondSegmentPos = strpos($uri, '/')) {
             $uri = substr($uri, 0, $secondSegmentPos);
-        }
+        } */
 		
         // If page is one of the white listed pages, then skip the check
-        $uri = '/' . $uri;
-        if (in_array($uri,$whiteListedPages)) { 
+       // $uri = '/' . $uri;
+        if(in_array($uri, $whiteActions)) { 
             return;
         }
         $authService = new AuthenticationService();
@@ -101,7 +104,7 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
             $pluginManager  = $serviceManager->get('Zend\Mvc\Controller\PluginManager');
             $urlPlugin      = $pluginManager->get('url');
             $redirectPlugin = $pluginManager->get('redirect');
-            return $redirectPlugin->toRoute('user',array('controller'=>'index','action'=>'signin'));
+            return $redirectPlugin->toRoute('user',array('controller'=>'index','action'=>'signin','lang'=>'en'));
         }
     } 
     
