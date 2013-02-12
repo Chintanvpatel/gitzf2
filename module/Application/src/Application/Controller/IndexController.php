@@ -71,7 +71,7 @@ public function signupAction()
     		$Files = $this->getRequest()->getFiles()->toArray();
     		$data = array_merge(
     				$this->getRequest()->getPost()->toArray(),
-    				$this->getRequest()->getFiles()->toArray()
+    				array('fileupload'=>$Files['fileupload']['name'])
     				//$this->params()->fromFiles('fileupload')
     		); 
 
