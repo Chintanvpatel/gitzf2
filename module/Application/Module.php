@@ -77,7 +77,7 @@ public function preDispatch(\Zend\Mvc\MvcEvent $e)
             '/signup',
         );
         
-        $whiteActions = array('index','signin','signup');
+        $whiteActions = array('signin','signup');
         
         $application    = $e->getApplication();
         $serviceManager = $application->getServiceManager();
