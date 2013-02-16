@@ -25,9 +25,10 @@ return array(
         		'paginator' => array(
         				'type' => 'segment',
         				'options' => array(
-        						'route' => '/album/[page/:page][/]',
+        						'route' => '/album[/page/:page][/sort/:sort][/]',
         						'defaults' => array(
         								'page' => 1,
+        								'sort' =>'id',
         								'controller' => 'Album\Controller\Album',
         								'action'     => 'index',
         						),

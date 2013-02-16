@@ -8,21 +8,21 @@ $this->headTitle($title);
 
 <table class="table">
 <tr>
-    <th>Title</th>
-    <th>Artist</th>
+    <th><a href="<?php echo $this->url('paginator',array('sort' => 'title'));?>">Title</a></th>
+    <th><a href="<?php echo $this->url('paginator',array('sort' => 'artist'));?>">Artist</a></th>
     <th>&nbsp;</th>
 </tr>
 <?php foreach($paginator as $album) : ?>
 <tr style="background-color:<?php echo $this->cycle(array("#F0F0F0","#FFFFFF"))->next()?>">
-    <td><?php echo $this->escapeHtml($album->title);?></td>
-    <td><?php echo $this->escapeHtml($album->artist);?></td>
+    <td><?php echo $this->escapeHtml($album['title']);?></td>
+    <td><?php echo $this->escapeHtml($album['artist']);?></td>
     <td>
         <a href="<?php echo $this->url('album',
-            array('action'=>'edit', 'id' => $album->id));?>">Edit</a>
+            array('action'=>'edit', 'id' => $album['id']));?>">Edit</a>
         <a href="<?php echo $this->url('album',
-            array('action'=>'delete', 'id' => $album->id));?>">Delete</a>
+            array('action'=>'delete', 'id' => $album['id']));?>">Delete</a>
     </td>
 </tr>
 <?php endforeach; ?>
 </table>
-<?php echo $this->paginationControl($this->paginator,'Sliding','paginator.phtml', array('route' => 'paginator')); ?>
+<?php echo $this->paginationControl($this->paginator,'Sliding','paginator.phtml', array('route' => 'paginator','order'=>$this->order)); ?>

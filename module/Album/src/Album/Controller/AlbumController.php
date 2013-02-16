@@ -12,24 +12,27 @@ class AlbumController extends AbstractActionController
 {
     protected $albumTable;
 
-	public function indexAction()
+public function indexAction()
     {
     	//$page    = $this->params()->fromRoute('paginator');
     	//$matches =  $this->getEvent()->getRouteMatch();
     	//$page = $matches->getParam('page');
     	$page = (int)$this->params('page');
-    	$albumData = $this->getAlbumTable()->fetchAll();
+    	$order = $this->params('sort');
+    	$albumData = $this->getAlbumTable()->fetchAll($order);
     	$data = array();
-    	foreach ($albumData as $d) {
+    	/* foreach ($albumData as $d) {
     		$data[] = $albumData->current();
-    	}
-    	$paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($data));
+    	} */
+    	$paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($albumData));
     	$paginator->setCurrentPageNumber($page);
     	$paginator->setItemCountPerPage(4);
-        /** Change layout **/
+    	
+    	/** Change layout **/
     	//$this->layout('layout/layoutalbum');
         return new ViewModel(array(
             'paginator' => $paginator,
+        	'order' => $order,
         ));
         /** Change view files **/
         //$viewModel->setTemplate('album/album/nameofphtmlfile');

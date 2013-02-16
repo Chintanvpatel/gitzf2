@@ -37,6 +37,11 @@ class Album implements InputFilterAwareInterface
     	$hydrator = new Hydrator\ObjectProperty();
     	return  $hydrator->extract($this);
     }
+    
+    public function toArray()
+    {
+    	return get_object_vars($this);
+    }
 
     public function setInputFilter(InputFilterInterface $inputFilter)
     {

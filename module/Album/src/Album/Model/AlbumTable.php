@@ -2,6 +2,7 @@
 
 namespace Album\Model;
 
+use Zend\Db\Sql\Select;
 use Zend\Db\TableGateway\AbstractTableGateway;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
@@ -33,7 +34,7 @@ class AlbumTable extends AbstractTableGateway
     $this->initialize();
     } */
 
-    public function fetchAll()
+    public function fetchAll($order)
     {
     	
     	//$data = $this->adapter->query('SELECT * FROM `album`');
@@ -62,8 +63,10 @@ class AlbumTable extends AbstractTableGateway
     	$results = $statement->execute();
     	print_r($results); exit;   */
     	
-        $resultSet = $this->select();
-        return $resultSet;
+        $resultSet = $this->select(function (Select $select) use ($order) {
+    		$select->order(array($order => 'DESC')); 		
+    	});
+    	return $resultSet->toArray();
     }
 
     public function getAlbum($id)
