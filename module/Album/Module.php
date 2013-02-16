@@ -44,6 +44,15 @@ public function getServiceConfig()
 	                    return $table;
 	                },
 	            ),
+	            
+	            /** Define initializer for setting adapter  **/
+	            /* 'initializers' => array(
+	             function ($instance, $sm) {
+	            		if ($instance instanceof \Zend\Db\Adapter\AdapterAwareInterface) {
+	            		$instance->setDbAdapter($sm->get('adapter1'));
+	            		}
+	            		}
+	            ), */
         );
     }    
 

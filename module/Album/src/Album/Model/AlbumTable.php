@@ -5,6 +5,10 @@ namespace Album\Model;
 use Zend\Db\TableGateway\AbstractTableGateway;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\ResultSet\AbstractResultSet;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Adapter\AdapterAwareInterface;
 
 class AlbumTable extends AbstractTableGateway
 {
@@ -18,6 +22,16 @@ class AlbumTable extends AbstractTableGateway
 
         $this->initialize();
     }
+    
+    /** Set DbAdapter for model **/
+    
+    /* public function setDbAdapter(Adapter $adapter)
+     {
+    $this->adapter = $adapter;
+    $this->resultSetPrototype = new HydratingResultSet();
+    
+    $this->initialize();
+    } */
 
     public function fetchAll()
     {
