@@ -2,6 +2,7 @@
 namespace Application\Form;
 
 use Zend\Form\Form;
+use Zend\Captcha\Image as CaptchaImage;
 
 class ApplicationForm extends Form
 {
@@ -43,11 +44,26 @@ class ApplicationForm extends Form
 
     }
     
-    public function registerForm()
+    public function registerForm($urlcaptcha = null)
     {
     	$this->setAttribute('name', 'register');
     	$this->setAttribute('method', 'post');
     	$this->setAttribute('enctype','multipart/form-data');
+    	
+    	$dirdata = './public/data';
+    	 
+    	//pass captcha image options
+    	$captchaImage = new CaptchaImage(array(
+    			'font' => $dirdata . '/fonts/Ubuntu-R.ttf',
+    			'width' => 250,
+    			'height' => 100,
+    			'dotNoiseLevel' => 40,
+    			'lineNoiseLevel' => 3,
+    			'Expiration'=>10,
+    			'gcFreq'=>1)
+    	);
+    	$captchaImage->setImgDir($dirdata.'/captcha');
+    	$captchaImage->setImgUrl($urlcaptcha);
     	
     	$this->add(array(
     			'name' => 'fname',
@@ -96,6 +112,15 @@ class ApplicationForm extends Form
     			),
     			'options' => array(
     					'label' => 'Profile Picture',
+    			),
+    	));
+    	
+    	$this->add(array(
+    			'type' => 'Zend\Form\Element\Captcha',
+    			'name' => 'captcha',
+    			'options' => array(
+    					'label' => 'Please verify you are human',
+    					'captcha' => $captchaImage,
     			),
     	));
     	

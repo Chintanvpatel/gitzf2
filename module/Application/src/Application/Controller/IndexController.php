@@ -59,7 +59,7 @@ public function signupAction()
     {
     	//echo $this->url()->fromRoute('home', array(), array('force_canonical' => true)); exit;
     	$form = new ApplicationForm();
-    	$form->registerForm();
+    	$form->registerForm($this->getRequest()->getBaseUrl().'/data/captcha/');
     	$form->get('submit')->setAttribute('value', 'Sign up');
 
     	
