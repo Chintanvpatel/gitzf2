@@ -6,6 +6,7 @@ Includes
   4. ACL (Application module)
   5. Multiple DB (Album Module)
   6. Image upload (User module registration)
+  7. REST in zf2
   
 Reference :
 http://samsonasik.wordpress.com/
