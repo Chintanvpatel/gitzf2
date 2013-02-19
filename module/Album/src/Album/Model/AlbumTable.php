@@ -34,7 +34,7 @@ class AlbumTable extends AbstractTableGateway
     $this->initialize();
     } */
 
-    public function fetchAll($order)
+    public function fetchAll($order = 'id')
     {
     	
     	//$data = $this->adapter->query('SELECT * FROM `album`');

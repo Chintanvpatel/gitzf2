@@ -3,6 +3,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Album\Controller\Album' => 'Album\Controller\AlbumController',
+        	'Album\Controller\AlbumRest' => 'Album\Controller\AlbumRestController',
         ),
     ),
     
@@ -11,7 +12,7 @@ return array(
             'album' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/album[/:action][/:id][/]',
+                    'route'    => '/album[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
@@ -22,6 +23,20 @@ return array(
                     ),
                 ),
             ),
+        		
+        		'albumrest' => array(
+        				'type'    => 'segment',
+        				'options' => array(
+        						'route'    => '/albumrest[/:id]',
+        						'constraints' => array(
+        								'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+        								'id'     => '[0-9]+',
+        						),
+        						'defaults' => array(
+        								'controller' => 'Album\Controller\AlbumRest',
+        						),
+        				),
+        		),
         		'paginator' => array(
         				'type' => 'segment',
         				'options' => array(
@@ -38,8 +53,19 @@ return array(
     ),
 
     'view_manager' => array(
-        'template_path_stack' => array(
-            'album' => __DIR__ . '/../view',
+        'display_not_found_reason' => true,
+        'display_exceptions'       => true,
+        'doctype'                  => 'HTML5',
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+        'template_map' => array(
+            'layout/layoutalbum'           => __DIR__ . '/../view/layout/layoutalbum.phtml',
         ),
+        'template_path_stack' => array(
+           "Album" => __DIR__ . '/../view',
+        ),
+    	'strategies' => array(
+    		'ViewJsonStrategy',
+   		),
     ),
 );
