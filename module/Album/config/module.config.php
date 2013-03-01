@@ -51,6 +51,12 @@ return array(
         		),
         ),
     ),
+		
+	'service_manager' => array(
+			'abstract_factories' => array(
+					'Album\AdapterFactory\DbFactory',
+			),
+	),
 
     'view_manager' => array(
         'display_not_found_reason' => true,
