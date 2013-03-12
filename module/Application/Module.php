@@ -28,7 +28,7 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
         $sm = $e->getApplication()->getServiceManager();
         
         $e->getApplication()->getEventManager()->getSharedManager()->attach(__NAMESPACE__, MvcEvent::EVENT_DISPATCH, function ($e) use ($sm) {
-        	$sm->get('ControllerPluginManager')->get('Aclplugin')->check($e);
+        	return $sm->get('ControllerPluginManager')->get('Aclplugin')->check($e);
         }, 2);
         //$e->getApplication()->getEventManager()->getSharedManager()->attach(__NAMESPACE__,'save', array($this, 'save'), 3);
         //$e->getApplication()->getEventManager()->getSharedManager()->attach(__NAMESPACE__, MvcEvent::EVENT_DISPATCH, array($this, 'getacl'), 2);
