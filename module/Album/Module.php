@@ -3,7 +3,8 @@
 namespace Album;
 
 use Album\Model\AlbumTable;
-use Album\AdapterFactory\AdapterFactory;
+//use Album\AdapterFactory\AdapterFactory;
+use Zend\Authentication\AuthenticationService;
 
 class Module
 {
@@ -36,10 +37,10 @@ public function getServiceConfig()
     {
         return array(
             'factories' => array(
-            		'adapter1'        => new AdapterFactory('db1'),
-            		'adapter2'        => new AdapterFactory('db2'),
+//            		'adapter1'        => new AdapterFactory('db1'),
+//            		'adapter2'        => new AdapterFactory('db2'),
 	                'Album\Model\AlbumTable' =>  function($sm) {
-	                    $dbAdapter = $sm->get('adapter1');
+	                    $dbAdapter = $sm->get('adapter');
 	                    $table = new AlbumTable($dbAdapter);
 	                    return $table;
 	                },

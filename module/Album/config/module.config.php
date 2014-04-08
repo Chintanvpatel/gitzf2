@@ -54,8 +54,8 @@ return array(
 		
 	'service_manager' => array(
 			'abstract_factories' => array(
-					'Album\AdapterFactory\DbFactory',
-			),
+                                'Zend\Db\Adapter\AdapterAbstractServiceFactory',
+                        )
 	),
 
     'view_manager' => array(

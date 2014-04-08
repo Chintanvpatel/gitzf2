@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Global Configuration Override
  *
@@ -10,41 +11,26 @@
  * control, so do not include passwords or other sensitive information in this
  * file.
  */
-
 return array(
-    'db1' => array(
-        'driver' => 'Pdo',
-        'dsn'            => 'mysql:dbname=zf2tutorial;hostname=localhost',
-        'username'       => 'root',
-        'password'       => '',
-        'port'           => '3306',
-        'driver_options' => array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-        ),
-    ),
-	'db2' => array(
-			'driver' => 'Pdo',
-			'dsn'            => 'mysql:dbname=zf2tutorial1;hostname=localhost',
-			'username'       => 'root',
-			'password'       => '',
-			'port'           => '3306',
-			'driver_options' => array(
-					PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-			),
-	),
     'db' => array(
-			'driver' => 'Pdo',
-			'dsn'            => 'mysql:dbname=zf2tutorial;hostname=localhost',
-			'username'       => 'root',
-			'password'       => '',
-			'port'           => '3306',
-			'driver_options' => array(
-					PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-			),
-	),
-    'service_manager' => array(
-        'factories' => array(
-            'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+        'adapters' => array(
+            'adapter' => array(
+                'driver' => 'Pdo',
+                'dsn' => 'mysql:dbname=zf2tutorial;host=localhost',
+                'username' => 'root',
+                'password' => ''
+            ),
+            'adapter2' => array(
+                'driver' => 'Pdo',
+                'dsn' => 'mysql:dbname=zf2tutorial1;host=localhost',
+                'username' => 'root',
+                'password' => ''
+            ),
         ),
-    ), 
+        'service_manager' => array(
+            'factories' => array(
+                'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+            ),
+        ),
+    )
 );

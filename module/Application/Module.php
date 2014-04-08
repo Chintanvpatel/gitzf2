@@ -63,6 +63,10 @@ class Module implements AutoloaderProviderInterface,ConfigProviderInterface
     						$table = new UserTable($dbAdapter);
     						return $table;
     					},
+                                        'myauth' => function ($sm) {
+                                            $auth = new AuthenticationService();
+                                            return $auth;
+                                        },
     					
     			),
     	);
